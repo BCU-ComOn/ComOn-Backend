@@ -1,4 +1,4 @@
-package com.jojoldu.book.springboot.web;
+package kr.ac.bc.comon.springboot.web;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(controllers = HelloController.class,
+@WebMvcTest(controllers = kr.ac.bc.comon.springboot.web.HelloController.class,
         excludeFilters = {
         @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE)
         }

@@ -1,4 +1,4 @@
-package com.jojoldu.book.springboot.web.dto;
+package kr.ac.bc.comon.springboot.web.dto;
 
 import org.junit.Test;
 

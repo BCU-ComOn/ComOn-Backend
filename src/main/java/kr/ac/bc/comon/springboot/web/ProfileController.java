@@ -1,4 +1,4 @@
-package com.jojoldu.book.springboot.web;
+package kr.ac.bc.comon.springboot.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
