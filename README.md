@@ -15,12 +15,15 @@ kr.ac.bc.comon.springboot/
 |   └── repository/
 ├── config/
 ├── endpoint/
-|   ├── project/
-|   ├── post/
-|   └── user/
+|   └── DOMAIN/
 |       ├── dto/
 |       ├── service/
-|       └── UserContoller.java
+|       └── DOMAINContoller.java
+|   └── DOMAIN/
+|       ├── dto/
+|       ├── service/
+|       └── DOMAINContoller.java
+|   ...
 ├── handler/
 └── Application.java
 ```
@@ -32,7 +35,9 @@ kr.ac.bc.comon.springboot/
 * config: Spring Config
 
 * endpoint: RESTful API 관련
-  * endpoint.DOMAIN: 각 도메인 이름 별 패키지
+  * endpoint.DOMAIN: 각 도메인 별 패키지 (예: user, project 등)
   * endpoint.DOMAIN.dto: 도메인의 DTO 클래스들
   * endpoint.DOMAIN.service: 도메인의 Service 클래스들
-  * endpoint.DOMAIN.DOMAINController.java: 도메인에 대한 메인 컨트롤러
+  * endpoint.DOMAIN.DOMAINController.java: 도메인에 대한 메인 Controller
+
+* handler: Login/Session 관련 클래스들
