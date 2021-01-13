@@ -29,7 +29,7 @@ kr.ac.bc.comon.springboot/
   * comon.pk: 복합 기본키 클래스들
   * comon.repository: JPA Repository 클래스들
 
-* config: Spring Config정
+* config: Spring Config
 
 * endpoint: RESTful API 관련
   * endpoint.DOMAIN: 각 도메인 이름 별 패키지
