@@ -1,6 +1,7 @@
 package kr.ac.bc.comon.springboot.common.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,8 @@ import org.hibernate.annotations.Type;
 import javax.persistence.Id;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -35,6 +38,10 @@ public class UserEntity extends BaseTime{
     @Column(name = "USER_EX")
     @Type(type = "text")
     private String userEx;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userFK")
+    private List<GenerationEntity> postLikeList = new ArrayList<>();
 
 
     @Builder
