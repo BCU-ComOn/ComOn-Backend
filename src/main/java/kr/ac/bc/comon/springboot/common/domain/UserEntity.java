@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 import javax.persistence.*;
 
@@ -43,4 +43,5 @@ public class UserEntity extends BaseTime{
         this.userId = userId;
         this.userNm = userNm;
     }
+
 }
