@@ -53,7 +53,7 @@ public class UserControllerTest {
         String url = "http://localhost:" + port + "/user/join";
 
         //when
-        ResponseEntity<Integer> responseEntity = restTemplate.postForEntity(url, requestDto, Integer.class);
+        ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, requestDto, Long.class);
 
         //then
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);

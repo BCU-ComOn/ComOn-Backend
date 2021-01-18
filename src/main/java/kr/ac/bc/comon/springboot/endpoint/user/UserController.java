@@ -3,6 +3,7 @@ package kr.ac.bc.comon.springboot.endpoint.user;
 import kr.ac.bc.comon.springboot.endpoint.user.dto.UserSaveRequestDto;
 import kr.ac.bc.comon.springboot.endpoint.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/join")
-    public Integer join(@RequestBody UserSaveRequestDto requestDto) {
+    public Long join(@RequestBody UserSaveRequestDto requestDto) {
         return userService.save(requestDto);
     }
 }

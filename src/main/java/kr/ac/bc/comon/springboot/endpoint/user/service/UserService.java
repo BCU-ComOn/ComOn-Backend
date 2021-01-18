@@ -18,8 +18,8 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public Integer save(UserSaveRequestDto requestDto) {
-        Integer userCd = userRepository.save(requestDto.toEntity(encryptUtil.encryptSHA256(requestDto.getUserId()))).getUserCd();
+    public Long save(UserSaveRequestDto requestDto) {
+        Long userCd = userRepository.save(requestDto.toEntity(encryptUtil.encryptSHA256(requestDto.getUserId()))).getUserCd();
         if (requestDto.getUserField() != null) {
 
         }

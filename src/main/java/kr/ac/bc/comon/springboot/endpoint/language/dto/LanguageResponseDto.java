@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 public class LanguageResponseDto {
-    private Integer languageCd;
+    private long languageCd;
     private String languageNm;
 
     public LanguageResponseDto(LanguageEntity languageEntity) {
