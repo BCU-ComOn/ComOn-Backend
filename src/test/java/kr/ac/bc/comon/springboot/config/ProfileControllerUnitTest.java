@@ -1,6 +1,6 @@
 package kr.ac.bc.comon.springboot.config;
 
-import kr.ac.bc.comon.springboot.ProfileController;
+import kr.ac.bc.comon.springboot.config.ProfileController;
 import org.junit.Test;
 import org.springframework.mock.env.MockEnvironment;
 
