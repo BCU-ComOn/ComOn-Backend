@@ -10,7 +10,7 @@
 ## Package Structure
 ```
 kr.ac.bc.comon.springboot/
-├── comon/
+├── common/
 |   ├── domain/
 |   ├── pk/
 |   └── repository/
@@ -28,10 +28,10 @@ kr.ac.bc.comon.springboot/
 ├── handler/
 └── Application.java
 ```
-* comon: 데이터베이스 관련
-  * comon.domain: JPA Entity 클래스들
-  * comon.pk: 복합 기본키 클래스들
-  * comon.repository: JPA Repository 클래스들
+* common: 데이터베이스 관련
+  * common.domain: JPA Entity 클래스들
+  * common.pk: 복합 기본키 클래스들
+  * common.repository: JPA Repository 클래스들
 
 * config: Spring Config
 
