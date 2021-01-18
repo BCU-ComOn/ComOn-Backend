@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPOSITORY=/home/ec2-user/ComOn/Backend
+REPOSITORY=/home/ec2-user/ComOn-Backend
 PROJECT_NAME=ComOn-Backend
 
 echo "> Build 파일 복사"
