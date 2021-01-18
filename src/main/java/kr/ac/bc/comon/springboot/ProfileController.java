@@ -1,4 +1,4 @@
-package kr.ac.bc.comon.springboot.config;
+package kr.ac.bc.comon.springboot;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
