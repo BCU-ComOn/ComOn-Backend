@@ -1,4 +1,4 @@
-package kr.ac.bc.comon.springboot.config;
+package kr.ac.bc.comon.springboot;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

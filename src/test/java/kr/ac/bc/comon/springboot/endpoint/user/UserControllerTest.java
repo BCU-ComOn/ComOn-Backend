@@ -1,4 +1,4 @@
-package kr.ac.bc.comon.springboot.config.endpoint.user;
+package kr.ac.bc.comon.springboot.endpoint.user;
 
 
 import kr.ac.bc.comon.springboot.common.domain.UserEntity;
