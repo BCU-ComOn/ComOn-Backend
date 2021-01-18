@@ -14,7 +14,7 @@ public class LanguageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "LANGUAGE_CD")
-    private Long languageCd;
+    private Integer languageCd;
 
     @Column(name = "LANGUAGE_NM", nullable = false)
     private String languageNm;

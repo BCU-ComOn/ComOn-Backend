@@ -8,6 +8,6 @@ import java.io.Serializable;
 @Getter
 @Embeddable
 public class UserFieldPK implements Serializable {
-    private Long userFK;
-    private Long fieldFK;
+    private Integer userFK;
+    private Integer fieldFK;
 }
