@@ -18,14 +18,14 @@ public class UserSaveRequestDto {
     public UserSaveRequestDto(String userId,
                               String userNm,
                               String userField,
-                              String userLanguage){
+                              String userLanguage) {
         this.userId = userId;
         this.userNm = userNm;
         this.userField = userField;
         this.userLanguage = userLanguage;
     }
 
-    public UserEntity toEntity(String userId){
+    public UserEntity toEntity(String userId) {
         return UserEntity.builder()
                 .userId(userId)
                 .userNm(userNm)

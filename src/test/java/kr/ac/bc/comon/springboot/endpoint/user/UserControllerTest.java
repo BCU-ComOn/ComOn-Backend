@@ -36,7 +36,7 @@ public class UserControllerTest {
 
 
     @Test
-    public void User_회원등록() throws Exception{
+    public void User_회원등록() throws Exception {
         //given
         String userId = "0909099";
         String userNm = "testUser";

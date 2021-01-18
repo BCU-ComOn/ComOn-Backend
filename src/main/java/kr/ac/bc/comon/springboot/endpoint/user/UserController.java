@@ -19,7 +19,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/join")
-    public Long join(@RequestBody UserSaveRequestDto requestDto){
+    public Long join(@RequestBody UserSaveRequestDto requestDto) {
         return userService.save(requestDto);
     }
 }

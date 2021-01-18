@@ -7,11 +7,11 @@ import java.security.NoSuchAlgorithmException;
 
 @Service
 public class EncryptUtil {
-    public String encryptSHA256(String str){
+    public String encryptSHA256(String str) {
 
         String sha = "";
 
-        try{
+        try {
             MessageDigest sh = MessageDigest.getInstance("SHA-256");
             sh.update(str.getBytes());
             byte[] byteData = sh.digest();
@@ -22,7 +22,7 @@ public class EncryptUtil {
 
             sha = sb.toString();
 
-        }catch(NoSuchAlgorithmException e){
+        } catch (NoSuchAlgorithmException e) {
             //e.printStackTrace();
             System.out.println("Encrypt Error - NoSuchAlgorithmException");
             sha = null;

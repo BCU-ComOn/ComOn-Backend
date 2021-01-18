@@ -25,7 +25,7 @@ public class HistoryEntity {
 
     @Builder
     public HistoryEntity(String historyEx,
-                      Date historyDt) {
+                         Date historyDt) {
         this.historyEx = historyEx;
         this.historyDt = historyDt;
     }

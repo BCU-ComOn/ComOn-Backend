@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
+
 import javax.persistence.Id;
 
 import javax.persistence.*;
@@ -16,14 +17,14 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "USER_TB")
-public class UserEntity extends BaseTime{
+public class UserEntity extends BaseTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_CD")
     private Long userCd;
 
-    @Column(name = "USER_ID", unique=true, nullable = false)
+    @Column(name = "USER_ID", unique = true, nullable = false)
     private String userId;
 
     @Column(name = "USER_NM", nullable = false)

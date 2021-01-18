@@ -13,7 +13,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 @Entity
 @Table(name = "GENERATION_TB")
 @IdClass(GenerationPK.class)
-public class GenerationEntity extends BaseTime{
+public class GenerationEntity extends BaseTime {
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
@@ -30,7 +30,7 @@ public class GenerationEntity extends BaseTime{
     @Builder
     private GenerationEntity(UserEntity userFK,
                              Integer generationNum,
-                             Integer generationPosition){
+                             Integer generationPosition) {
         this.userFK = userFK;
         this.generationNum = generationNum;
         this.generationPosition = generationPosition;
