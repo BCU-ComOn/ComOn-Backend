@@ -15,7 +15,7 @@ public class HistoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "HISTORY_CD")
-    private Integer historyCd;
+    private Long historyCd;
 
     @Column(name = "HISTORY_EX")
     private String historyEx;

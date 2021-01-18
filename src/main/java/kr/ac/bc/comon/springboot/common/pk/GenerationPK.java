@@ -8,6 +8,6 @@ import java.io.Serializable;
 @Getter
 @Embeddable
 public class GenerationPK implements Serializable {
-    private Integer userFK;
+    private Long userFK;
     private Integer generationNum;
 }

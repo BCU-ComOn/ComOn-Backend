@@ -14,7 +14,7 @@ public class FieldEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "FIELD_CD")
-    private Integer fieldCd;
+    private Long fieldCd;
 
     @Column(name = "FIELD_NM", nullable = false)
     private String fieldNm;

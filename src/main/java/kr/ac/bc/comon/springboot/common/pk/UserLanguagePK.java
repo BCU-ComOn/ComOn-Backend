@@ -8,6 +8,6 @@ import java.io.Serializable;
 @Getter
 @Embeddable
 public class UserLanguagePK implements Serializable {
-    private Integer userFK;
-    private Integer languageFK;
+    private Long userFK;
+    private Long languageFK;
 }
