@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 public class FieldResponseDto {
-    private long fieldCd;
+    private Integer fieldCd;
     private String fieldNm;
 
     public FieldResponseDto(FieldEntity fieldEntity) {

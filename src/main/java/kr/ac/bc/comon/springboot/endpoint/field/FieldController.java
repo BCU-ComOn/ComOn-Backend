@@ -16,7 +16,7 @@ public class FieldController {
     private final FieldService fieldService;
 
     @GetMapping("/{id}")
-    public FieldResponseDto findById(@PathVariable Long id) {
+    public FieldResponseDto findById(@PathVariable Integer id) {
         return fieldService.findById(id);
     }
 

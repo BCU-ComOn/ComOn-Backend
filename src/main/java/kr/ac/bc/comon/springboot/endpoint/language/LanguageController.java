@@ -21,7 +21,7 @@ public class LanguageController {
     private final LanguageService languageService;
 
     @GetMapping("/{id}")
-    public LanguageResponseDto findById(@PathVariable Long id) {
+    public LanguageResponseDto findById(@PathVariable Integer id) {
         return languageService.findById(id);
     }
 

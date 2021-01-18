@@ -16,7 +16,7 @@ public class FieldService {
     private final FieldRepository fieldRepository;
 
     @Transactional(readOnly = true)
-    public FieldResponseDto findById(Long id) {
+    public FieldResponseDto findById(Integer id) {
         FieldEntity fieldEntity = fieldRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 분야가 없습니다. id=" + id));
 

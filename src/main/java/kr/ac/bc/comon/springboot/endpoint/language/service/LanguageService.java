@@ -19,7 +19,7 @@ public class LanguageService {
     private final LanguageRepository languageRepository;
 
     @Transactional(readOnly = true)
-    public LanguageResponseDto findById(Long id) {
+    public LanguageResponseDto findById(Integer id) {
         LanguageEntity languageEntity = languageRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 분야가 없습니다. id=" + id));
 
