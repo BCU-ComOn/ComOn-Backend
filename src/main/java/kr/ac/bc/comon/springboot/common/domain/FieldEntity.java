@@ -22,10 +22,6 @@ public class FieldEntity {
     @Column(name = "FIELD_NM", nullable = false)
     private String fieldNm;
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "fieldFkNm", cascade = CascadeType.REFRESH)
-    private List<ProjectEntity> projectList = new ArrayList<>();
-
     @Builder
     public FieldEntity(String fieldNm) {
         this.fieldNm = fieldNm;

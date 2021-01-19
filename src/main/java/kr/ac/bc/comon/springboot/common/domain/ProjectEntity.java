@@ -16,7 +16,7 @@ public class ProjectEntity extends BaseTime{
     @Column(name = "PROJECT_CD")
     private Long projectCd;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FIELD_FK_NM")
     private FieldEntity fieldFkNm;
 
