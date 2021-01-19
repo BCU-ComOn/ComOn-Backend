@@ -12,5 +12,6 @@ import java.util.List;
 @Repository
 public interface ProjectLanguageRepository extends JpaRepository<ProjectLanguageEntity, ProjectLanguagePK> {
     ProjectLanguageEntity findByProjectFkAndLanguageFkNm(ProjectEntity projectFk, String languageFkNm);
-    List<ProjectEntity> findAllByProjectFk(ProjectEntity projectFk);
+    List<ProjectLanguageEntity> findAllByProjectFk(ProjectEntity projectFk);
+    List<ProjectLanguageEntity> findAllByLanguageFkNm(String languageFkNm);
 }
