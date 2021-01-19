@@ -1,10 +1,13 @@
 package kr.ac.bc.comon.springboot.common.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -18,6 +21,10 @@ public class FieldEntity {
 
     @Column(name = "FIELD_NM", nullable = false)
     private String fieldNm;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "fieldFkNm", cascade = CascadeType.REFRESH)
+    private List<ProjectEntity> projectList = new ArrayList<>();
 
     @Builder
     public FieldEntity(String fieldNm) {
