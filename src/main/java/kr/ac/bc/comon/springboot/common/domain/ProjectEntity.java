@@ -1,10 +1,13 @@
 package kr.ac.bc.comon.springboot.common.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -37,6 +40,10 @@ public class ProjectEntity extends BaseTime{
 
     @Column(name = "PROJECT_URL")
     private String projectUrl;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "languageFkNm", cascade = CascadeType.REMOVE)
+    private List<ProjectLanguageEntity> languageList = new ArrayList<>();
 
     @Builder
     public ProjectEntity(FieldEntity fieldFkNm,
