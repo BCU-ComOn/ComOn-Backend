@@ -45,6 +45,10 @@ public class ProjectEntity extends BaseTime{
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "projectFk", cascade = CascadeType.REMOVE)
     private List<ProjectLanguageEntity> languageList = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "projectFk", cascade = CascadeType.REMOVE)
+    private List<ProjectMemberEntity> userList = new ArrayList<>();
+
     @Builder
     public ProjectEntity(FieldEntity fieldFkNm,
                          String projectNm,

@@ -44,6 +44,9 @@ public class UserEntity extends BaseTime {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "userFK")
     private List<GenerationEntity> postLikeList = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userFk", cascade = CascadeType.REMOVE)
+    private List<ProjectMemberEntity> projectList = new ArrayList<>();
 
     @Builder
     public UserEntity(String userId,
