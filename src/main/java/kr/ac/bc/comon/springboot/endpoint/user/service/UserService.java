@@ -32,6 +32,17 @@ public class UserService {
         return user.getUserCd();
     }
 
+    @Transactional
+    public UserResponseDto getUserProfile(String userCd){
+        UserEntity userEntity = userRepository.findByUserId(encryptUtil.encryptSHA256(userCd));
+        UserResponseDto userResponseDto =  new UserResponseDto(userEntity);
+
+        List<GenerationEntity> generationEntities = userEntity.getGenerationUsers();
+        userResponseDto.setUserPosition(Collections.max(generationEntities, Comparator.comparing(BaseTime::getCreatedDate)).getGenerationPosition());
+
+        return userResponseDto;
+    }
+
     @Transactional(readOnly = true)
     public UserEntity findEntity(Long userCd){
         return userRepository.findByUserCd(userCd);

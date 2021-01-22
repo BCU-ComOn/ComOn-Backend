@@ -85,4 +85,57 @@ public class UserControllerTest {
         assertThat(all.get(0).getUserNm()).isEqualTo(userNm);
         assertThat(all.get(0).getUserId()).isEqualTo(shaUserId);
     }
+
+    @Test
+    public  void User_프로필() throws Exception{
+
+        String userId = "0909099";
+        String userNm = "testUser";
+        String shaUserId = encryptUtil.encryptSHA256(userId);
+
+        //User_회원등록();
+
+        UserEntity saveUser = userRepository.save(UserEntity.builder()
+                .userId(shaUserId)
+                .userNm(userNm)
+                .build());
+
+        generationRepository.save(GenerationEntity.builder() //1기
+                .userFK(saveUser)
+                .generationNum(1)
+                .generationPosition(1)
+                .build());
+
+        userFieldRepository.save(UserFieldEntity.builder()
+                .userFK(saveUser)
+                .fieldNmFK("wab")
+                .build());
+
+        userFieldRepository.save(UserFieldEntity.builder()
+                .userFK(saveUser)
+                .fieldNmFK("android")
+                .build());
+
+
+        userLanguageRepository.save(UserLanguageEntity.builder()
+                .userFK(saveUser)
+                .languageNmFK("java")
+                .build());
+
+        generationRepository.save(GenerationEntity.builder() //2기
+                .userFK(saveUser)
+                .generationNum(2)
+                .generationPosition(0)
+                .build());
+
+
+        String url = "http://localhost:" + port + "/user/profile/" + userId;
+
+        ResponseEntity<UserResponseDto> responseEntity = restTemplate.getForEntity(url, UserResponseDto.class);
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseEntity.getBody().getUserPosition()).isEqualTo(0);
+        assertThat(responseEntity.getBody().getUserFields().size()).isEqualTo(2);
+    }
+
 }

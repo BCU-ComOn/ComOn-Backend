@@ -29,4 +29,10 @@ public class UserController {
         if(requestDto.getUserField() != null)userFieldService.save(userCd, requestDto.getUserField());
         return  userCd;
     }
+
+    @GetMapping("profile/{userId}")
+    public UserResponseDto userProfile(@PathVariable  String userId)
+    {
+        return userService.getUserProfile(userId);
+    }
 }
