@@ -9,5 +9,5 @@ import java.io.Serializable;
 @Embeddable
 public class UserLanguagePK implements Serializable {
     private Long userFK;
-    private Long languageFK;
+    private String languageNmFK;
 }

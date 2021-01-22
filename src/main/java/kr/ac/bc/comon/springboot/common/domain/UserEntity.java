@@ -42,7 +42,15 @@ public class UserEntity extends BaseTime {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "userFK")
-    private List<GenerationEntity> postLikeList = new ArrayList<>();
+    private List<GenerationEntity> generationUsers = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userFK")
+    private List<UserFieldEntity> fieldUsers = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userFK")
+    private List<UserLanguageEntity> languageUsers = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "userFk", cascade = CascadeType.REMOVE)

@@ -1,10 +1,18 @@
 package kr.ac.bc.comon.springboot.endpoint.user;
 
 
+import kr.ac.bc.comon.springboot.common.domain.GenerationEntity;
 import kr.ac.bc.comon.springboot.common.domain.UserEntity;
+import kr.ac.bc.comon.springboot.common.domain.UserFieldEntity;
+import kr.ac.bc.comon.springboot.common.domain.UserLanguageEntity;
+import kr.ac.bc.comon.springboot.common.repository.GenerationRepository;
+import kr.ac.bc.comon.springboot.common.repository.UserFieldRepository;
+import kr.ac.bc.comon.springboot.common.repository.UserLanguageRepository;
 import kr.ac.bc.comon.springboot.common.repository.UserRepository;
+import kr.ac.bc.comon.springboot.endpoint.user.dto.UserResponseDto;
 import kr.ac.bc.comon.springboot.endpoint.user.dto.UserSaveRequestDto;
 import kr.ac.bc.comon.springboot.util.EncryptUtil;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +38,22 @@ public class UserControllerTest {
     private TestRestTemplate restTemplate;
     @Autowired
     private UserRepository userRepository;
-
+    @Autowired
+    private  UserFieldRepository userFieldRepository;
+    @Autowired
+    private UserLanguageRepository userLanguageRepository;
+    @Autowired
+    private GenerationRepository generationRepository;
     @Autowired
     private EncryptUtil encryptUtil;
+
+    @After
+    public void tearDown() throws Exception{
+        userLanguageRepository.deleteAll();
+        userFieldRepository.deleteAll();
+        generationRepository.deleteAll();
+        userRepository.deleteAll();
+    }
 
 
     @Test
@@ -44,8 +65,9 @@ public class UserControllerTest {
         UserSaveRequestDto requestDto = UserSaveRequestDto.builder()
                 .userId(userId)
                 .userNm(userNm)
-                .userField(null)
-                .userLanguage(null)
+                .userField("web")
+                .userLanguage("java")
+                .userGenerationNum(1)
                 .build();
 
         String shaUserId = encryptUtil.encryptSHA256(userId);
@@ -63,4 +85,57 @@ public class UserControllerTest {
         assertThat(all.get(0).getUserNm()).isEqualTo(userNm);
         assertThat(all.get(0).getUserId()).isEqualTo(shaUserId);
     }
+
+    @Test
+    public  void User_프로필() throws Exception{
+
+        String userId = "0909099";
+        String userNm = "testUser";
+        String shaUserId = encryptUtil.encryptSHA256(userId);
+
+        //User_회원등록();
+
+        UserEntity saveUser = userRepository.save(UserEntity.builder()
+                .userId(shaUserId)
+                .userNm(userNm)
+                .build());
+
+        generationRepository.save(GenerationEntity.builder() //1기
+                .userFK(saveUser)
+                .generationNum(1)
+                .generationPosition(1)
+                .build());
+
+        userFieldRepository.save(UserFieldEntity.builder()
+                .userFK(saveUser)
+                .fieldNmFK("wab")
+                .build());
+
+        userFieldRepository.save(UserFieldEntity.builder()
+                .userFK(saveUser)
+                .fieldNmFK("android")
+                .build());
+
+
+        userLanguageRepository.save(UserLanguageEntity.builder()
+                .userFK(saveUser)
+                .languageNmFK("java")
+                .build());
+
+        generationRepository.save(GenerationEntity.builder() //2기
+                .userFK(saveUser)
+                .generationNum(2)
+                .generationPosition(0)
+                .build());
+
+
+        String url = "http://localhost:" + port + "/user/profile/" + userId;
+
+        ResponseEntity<UserResponseDto> responseEntity = restTemplate.getForEntity(url, UserResponseDto.class);
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseEntity.getBody().getUserPosition()).isEqualTo(0);
+        assertThat(responseEntity.getBody().getUserFields().size()).isEqualTo(2);
+    }
+
 }
