@@ -1,10 +1,18 @@
 package kr.ac.bc.comon.springboot.endpoint.user;
 
 
+import kr.ac.bc.comon.springboot.common.domain.GenerationEntity;
 import kr.ac.bc.comon.springboot.common.domain.UserEntity;
+import kr.ac.bc.comon.springboot.common.domain.UserFieldEntity;
+import kr.ac.bc.comon.springboot.common.domain.UserLanguageEntity;
+import kr.ac.bc.comon.springboot.common.repository.GenerationRepository;
+import kr.ac.bc.comon.springboot.common.repository.UserFieldRepository;
+import kr.ac.bc.comon.springboot.common.repository.UserLanguageRepository;
 import kr.ac.bc.comon.springboot.common.repository.UserRepository;
+import kr.ac.bc.comon.springboot.endpoint.user.dto.UserResponseDto;
 import kr.ac.bc.comon.springboot.endpoint.user.dto.UserSaveRequestDto;
 import kr.ac.bc.comon.springboot.util.EncryptUtil;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +38,22 @@ public class UserControllerTest {
     private TestRestTemplate restTemplate;
     @Autowired
     private UserRepository userRepository;
-
+    @Autowired
+    private  UserFieldRepository userFieldRepository;
+    @Autowired
+    private UserLanguageRepository userLanguageRepository;
+    @Autowired
+    private GenerationRepository generationRepository;
     @Autowired
     private EncryptUtil encryptUtil;
+
+    @After
+    public void tearDown() throws Exception{
+        userLanguageRepository.deleteAll();
+        userFieldRepository.deleteAll();
+        generationRepository.deleteAll();
+        userRepository.deleteAll();
+    }
 
 
     @Test
@@ -44,8 +65,9 @@ public class UserControllerTest {
         UserSaveRequestDto requestDto = UserSaveRequestDto.builder()
                 .userId(userId)
                 .userNm(userNm)
-                .userField(null)
-                .userLanguage(null)
+                .userField("web")
+                .userLanguage("java")
+                .userGenerationNum(1)
                 .build();
 
         String shaUserId = encryptUtil.encryptSHA256(userId);

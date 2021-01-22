@@ -1,13 +1,13 @@
 package kr.ac.bc.comon.springboot.endpoint.user;
 
+import kr.ac.bc.comon.springboot.endpoint.generation.service.GenerationService;
+import kr.ac.bc.comon.springboot.endpoint.user.dto.UserResponseDto;
 import kr.ac.bc.comon.springboot.endpoint.user.dto.UserSaveRequestDto;
+import kr.ac.bc.comon.springboot.endpoint.user.service.UserFieldService;
+import kr.ac.bc.comon.springboot.endpoint.user.service.UserLanguageService;
 import kr.ac.bc.comon.springboot.endpoint.user.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 
@@ -17,9 +17,16 @@ import javax.transaction.Transactional;
 @RestController
 public class UserController {
     private final UserService userService;
+    private final UserFieldService userFieldService;
+    private  final UserLanguageService userLanguageService;
+    private final GenerationService generationService;
 
     @PostMapping("/join")
     public Long join(@RequestBody UserSaveRequestDto requestDto){
-        return userService.save(requestDto);
+        Long userCd =  userService.save(requestDto);
+        generationService.save(userCd, requestDto.getUserGenerationNum());
+        if(requestDto.getUserLanguage() != null)userLanguageService.save(userCd, requestDto.getUserLanguage());
+        if(requestDto.getUserField() != null)userFieldService.save(userCd, requestDto.getUserField());
+        return  userCd;
     }
 }

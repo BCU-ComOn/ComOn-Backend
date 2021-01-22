@@ -13,16 +13,19 @@ public class UserSaveRequestDto {
     private String userNm;
     private String userField;
     private String userLanguage;
+    private Integer userGenerationNum;
 
     @Builder
     public UserSaveRequestDto(String userId,
                               String userNm,
                               String userField,
-                              String userLanguage){
+                              String userLanguage,
+                              Integer userGenerationNum){
         this.userId = userId;
         this.userNm = userNm;
         this.userField = userField;
         this.userLanguage = userLanguage;
+        this.userGenerationNum = userGenerationNum;
     }
 
     public UserEntity toEntity(String userId){
