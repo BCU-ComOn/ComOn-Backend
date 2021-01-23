@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 @Getter
 public class UserProfileResponseDto {
     private Long userCd;
+    private String userId;
     private String userNm;
     private String userPic;
     private String userURL;
@@ -26,9 +27,11 @@ public class UserProfileResponseDto {
 
     public UserProfileResponseDto(UserEntity userEntity){
         this.userCd = userEntity.getUserCd();
+        this.userId = userEntity.getUserId();
         this.userNm = userEntity.getUserNm();
         this.userPic = userEntity.getUserPic();
         this.userURL = userEntity.getUserURL();
+
         this.userFields = userEntity.getFieldUsers()
                 .stream()
                 .map(UserFieldDto::new)

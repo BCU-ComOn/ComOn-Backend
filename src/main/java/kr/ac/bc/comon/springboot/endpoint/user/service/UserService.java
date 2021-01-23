@@ -20,13 +20,14 @@ public class UserService {
 
     @Transactional
     public Long save(UserSaveRequestDto requestDto){
-        UserEntity user = userRepository.save(requestDto.toEntity(encryptUtil.encryptSHA256(requestDto.getUserId())));
-        return user.getUserCd();
+        return userRepository.save(requestDto.toEntity()).getUserCd();
     }
 
     @Transactional
-    public UserProfileResponseDto getUserProfile(String userCd){
-        UserEntity userEntity = userRepository.findByUserId(encryptUtil.encryptSHA256(userCd));
+    public UserProfileResponseDto getUserProfile(String userId){
+        UserEntity userEntity = Optional.ofNullable(userRepository.findByUserId(userId))
+                .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id = " + userId));
+
         UserProfileResponseDto userProfileResponseDto =  new UserProfileResponseDto(userEntity);
 
         List<GenerationEntity> generationEntities = userEntity.getGenerationUsers();

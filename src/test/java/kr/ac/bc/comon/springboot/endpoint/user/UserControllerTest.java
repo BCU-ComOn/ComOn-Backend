@@ -70,8 +70,6 @@ public class UserControllerTest {
                 .userGenerationNum(1)
                 .build();
 
-        String shaUserId = encryptUtil.encryptSHA256(userId);
-
         String url = "http://localhost:" + port + "/user/join";
 
         //when
@@ -83,7 +81,7 @@ public class UserControllerTest {
 
         List<UserEntity> all = userRepository.findAll();
         assertThat(all.get(0).getUserNm()).isEqualTo(userNm);
-        assertThat(all.get(0).getUserId()).isEqualTo(shaUserId);
+        assertThat(all.get(0).getUserId()).isEqualTo(userId);
     }
 
     @Test
@@ -91,12 +89,11 @@ public class UserControllerTest {
 
         String userId = "0909099";
         String userNm = "testUser";
-        String shaUserId = encryptUtil.encryptSHA256(userId);
 
         //User_회원등록();
 
         UserEntity saveUser = userRepository.save(UserEntity.builder()
-                .userId(shaUserId)
+                .userId(userId)
                 .userNm(userNm)
                 .build());
 
