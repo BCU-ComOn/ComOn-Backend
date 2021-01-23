@@ -135,4 +135,34 @@ public class UserControllerTest {
         assertThat(responseEntity.getBody().getUserFields().size()).isEqualTo(2);
     }
 
+    @Test
+    public void User_이름검색() throws Exception{
+
+        String userId = "0909099";
+        String userNm = "testUser";
+        String testNm = "test";
+
+        userRepository.save(UserEntity.builder()
+                .userId("0909099")
+                .userNm(userNm)
+                .build());
+
+        userRepository.save(UserEntity.builder()
+                .userId("123123")
+                .userNm(userNm)
+                .build());
+
+        userRepository.save(UserEntity.builder()
+                .userId("321321")
+                .userNm("홍길동")
+                .build());
+
+        String url = "http://localhost:" + port + "/user/search/" + testNm;
+
+        ResponseEntity<List> responseEntity = restTemplate.getForEntity(url, List.class);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseEntity.getBody().size()).isEqualTo(2);
+
+    }
+
 }

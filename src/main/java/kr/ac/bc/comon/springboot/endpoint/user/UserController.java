@@ -2,6 +2,7 @@ package kr.ac.bc.comon.springboot.endpoint.user;
 
 import kr.ac.bc.comon.springboot.endpoint.generation.service.GenerationService;
 import kr.ac.bc.comon.springboot.endpoint.user.dto.UserProfileResponseDto;
+import kr.ac.bc.comon.springboot.endpoint.user.dto.UserResponseDto;
 import kr.ac.bc.comon.springboot.endpoint.user.dto.UserSaveRequestDto;
 import kr.ac.bc.comon.springboot.endpoint.user.service.UserFieldService;
 import kr.ac.bc.comon.springboot.endpoint.user.service.UserLanguageService;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Transactional
 @RequestMapping("user")
@@ -34,5 +36,10 @@ public class UserController {
     public UserProfileResponseDto userProfile(@PathVariable  String userId)
     {
         return userService.getUserProfile(userId);
+    }
+
+    @GetMapping("search/{userNm}")
+    public List<UserResponseDto> userSearch(@PathVariable String userNm){
+        return userService.findByUserNm(userNm);
     }
 }

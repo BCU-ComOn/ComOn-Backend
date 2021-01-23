@@ -3,6 +3,7 @@ package kr.ac.bc.comon.springboot.endpoint.user.service;
 import kr.ac.bc.comon.springboot.common.domain.*;
 import kr.ac.bc.comon.springboot.common.repository.UserRepository;
 import kr.ac.bc.comon.springboot.endpoint.user.dto.UserProfileResponseDto;
+import kr.ac.bc.comon.springboot.endpoint.user.dto.UserResponseDto;
 import kr.ac.bc.comon.springboot.endpoint.user.dto.UserSaveRequestDto;
 import kr.ac.bc.comon.springboot.util.EncryptUtil;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -34,6 +36,12 @@ public class UserService {
         userProfileResponseDto.setUserPosition(Collections.max(generationEntities, Comparator.comparing(BaseTime::getCreatedDate)).getGenerationPosition());
 
         return userProfileResponseDto;
+    }
+
+    @Transactional
+    public List<UserResponseDto> findByUserNm(String userNm)
+    {
+        return userRepository.findAllByUserNmLike("%"+userNm+"%").stream().map(UserResponseDto::new).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
