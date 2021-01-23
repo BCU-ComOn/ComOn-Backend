@@ -1,23 +1,15 @@
 package kr.ac.bc.comon.springboot.endpoint.user.service;
 
 import kr.ac.bc.comon.springboot.common.domain.*;
-import kr.ac.bc.comon.springboot.common.repository.GenerationRepository;
-import kr.ac.bc.comon.springboot.common.repository.UserFieldRepository;
-import kr.ac.bc.comon.springboot.common.repository.UserLanguageRepository;
 import kr.ac.bc.comon.springboot.common.repository.UserRepository;
-import kr.ac.bc.comon.springboot.endpoint.user.dto.UserFieldDto;
-import kr.ac.bc.comon.springboot.endpoint.user.dto.UserLanguageDto;
-import kr.ac.bc.comon.springboot.endpoint.user.dto.UserResponseDto;
+import kr.ac.bc.comon.springboot.endpoint.user.dto.UserProfileResponseDto;
 import kr.ac.bc.comon.springboot.endpoint.user.dto.UserSaveRequestDto;
 import kr.ac.bc.comon.springboot.util.EncryptUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.nio.file.attribute.UserDefinedFileAttributeView;
-import java.sql.Date;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -33,14 +25,14 @@ public class UserService {
     }
 
     @Transactional
-    public UserResponseDto getUserProfile(String userCd){
+    public UserProfileResponseDto getUserProfile(String userCd){
         UserEntity userEntity = userRepository.findByUserId(encryptUtil.encryptSHA256(userCd));
-        UserResponseDto userResponseDto =  new UserResponseDto(userEntity);
+        UserProfileResponseDto userProfileResponseDto =  new UserProfileResponseDto(userEntity);
 
         List<GenerationEntity> generationEntities = userEntity.getGenerationUsers();
-        userResponseDto.setUserPosition(Collections.max(generationEntities, Comparator.comparing(BaseTime::getCreatedDate)).getGenerationPosition());
+        userProfileResponseDto.setUserPosition(Collections.max(generationEntities, Comparator.comparing(BaseTime::getCreatedDate)).getGenerationPosition());
 
-        return userResponseDto;
+        return userProfileResponseDto;
     }
 
     @Transactional(readOnly = true)

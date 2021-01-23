@@ -9,7 +9,7 @@ import kr.ac.bc.comon.springboot.common.repository.GenerationRepository;
 import kr.ac.bc.comon.springboot.common.repository.UserFieldRepository;
 import kr.ac.bc.comon.springboot.common.repository.UserLanguageRepository;
 import kr.ac.bc.comon.springboot.common.repository.UserRepository;
-import kr.ac.bc.comon.springboot.endpoint.user.dto.UserResponseDto;
+import kr.ac.bc.comon.springboot.endpoint.user.dto.UserProfileResponseDto;
 import kr.ac.bc.comon.springboot.endpoint.user.dto.UserSaveRequestDto;
 import kr.ac.bc.comon.springboot.util.EncryptUtil;
 import org.junit.After;
@@ -131,7 +131,7 @@ public class UserControllerTest {
 
         String url = "http://localhost:" + port + "/user/profile/" + userId;
 
-        ResponseEntity<UserResponseDto> responseEntity = restTemplate.getForEntity(url, UserResponseDto.class);
+        ResponseEntity<UserProfileResponseDto> responseEntity = restTemplate.getForEntity(url, UserProfileResponseDto.class);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody().getUserPosition()).isEqualTo(0);

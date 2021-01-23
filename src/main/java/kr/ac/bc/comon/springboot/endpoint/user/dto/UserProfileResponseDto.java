@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Setter
 @Getter
-public class UserResponseDto {
+public class UserProfileResponseDto {
     private Long userCd;
     private String userNm;
     private String userPic;
@@ -24,7 +24,7 @@ public class UserResponseDto {
     private List<UserFieldDto> userFields;
     private List<UserLanguageDto> userLanguages;
 
-    public UserResponseDto(UserEntity userEntity){
+    public UserProfileResponseDto(UserEntity userEntity){
         this.userCd = userEntity.getUserCd();
         this.userNm = userEntity.getUserNm();
         this.userPic = userEntity.getUserPic();
