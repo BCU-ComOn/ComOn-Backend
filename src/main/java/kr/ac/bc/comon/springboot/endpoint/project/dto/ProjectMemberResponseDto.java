@@ -17,7 +17,7 @@ public class ProjectMemberResponseDto {
 
     public ProjectMemberResponseDto(ProjectMemberEntity entity){
         this.projectFk = entity.getProjectFk().getProjectCd();
-        this.userFk = new UserResponseDto();
+        this.userFk = new UserResponseDto(entity.getUserFk());
         this.projectMemberEx = entity.getProjectMemberEx();
         this.projectMstSt = entity.getProjectMstSt();
     }
