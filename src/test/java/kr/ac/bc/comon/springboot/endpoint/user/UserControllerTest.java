@@ -9,7 +9,7 @@ import kr.ac.bc.comon.springboot.common.repository.GenerationRepository;
 import kr.ac.bc.comon.springboot.common.repository.UserFieldRepository;
 import kr.ac.bc.comon.springboot.common.repository.UserLanguageRepository;
 import kr.ac.bc.comon.springboot.common.repository.UserRepository;
-import kr.ac.bc.comon.springboot.endpoint.user.dto.UserResponseDto;
+import kr.ac.bc.comon.springboot.endpoint.user.dto.UserProfileResponseDto;
 import kr.ac.bc.comon.springboot.endpoint.user.dto.UserSaveRequestDto;
 import kr.ac.bc.comon.springboot.util.EncryptUtil;
 import org.junit.After;
@@ -70,8 +70,6 @@ public class UserControllerTest {
                 .userGenerationNum(1)
                 .build();
 
-        String shaUserId = encryptUtil.encryptSHA256(userId);
-
         String url = "http://localhost:" + port + "/user/join";
 
         //when
@@ -83,7 +81,7 @@ public class UserControllerTest {
 
         List<UserEntity> all = userRepository.findAll();
         assertThat(all.get(0).getUserNm()).isEqualTo(userNm);
-        assertThat(all.get(0).getUserId()).isEqualTo(shaUserId);
+        assertThat(all.get(0).getUserId()).isEqualTo(userId);
     }
 
     @Test
@@ -91,12 +89,11 @@ public class UserControllerTest {
 
         String userId = "0909099";
         String userNm = "testUser";
-        String shaUserId = encryptUtil.encryptSHA256(userId);
 
         //User_회원등록();
 
         UserEntity saveUser = userRepository.save(UserEntity.builder()
-                .userId(shaUserId)
+                .userId(userId)
                 .userNm(userNm)
                 .build());
 
@@ -131,11 +128,41 @@ public class UserControllerTest {
 
         String url = "http://localhost:" + port + "/user/profile/" + userId;
 
-        ResponseEntity<UserResponseDto> responseEntity = restTemplate.getForEntity(url, UserResponseDto.class);
+        ResponseEntity<UserProfileResponseDto> responseEntity = restTemplate.getForEntity(url, UserProfileResponseDto.class);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody().getUserPosition()).isEqualTo(0);
         assertThat(responseEntity.getBody().getUserFields().size()).isEqualTo(2);
+    }
+
+    @Test
+    public void User_이름검색() throws Exception{
+
+        String userId = "0909099";
+        String userNm = "testUser";
+        String testNm = "test";
+
+        userRepository.save(UserEntity.builder()
+                .userId("0909099")
+                .userNm(userNm)
+                .build());
+
+        userRepository.save(UserEntity.builder()
+                .userId("123123")
+                .userNm(userNm)
+                .build());
+
+        userRepository.save(UserEntity.builder()
+                .userId("321321")
+                .userNm("홍길동")
+                .build());
+
+        String url = "http://localhost:" + port + "/user/search/" + testNm;
+
+        ResponseEntity<List> responseEntity = restTemplate.getForEntity(url, List.class);
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseEntity.getBody().size()).isEqualTo(2);
+
     }
 
 }

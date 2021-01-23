@@ -28,7 +28,7 @@ public class UserSaveRequestDto {
         this.userGenerationNum = userGenerationNum;
     }
 
-    public UserEntity toEntity(String userId) {
+    public UserEntity toEntity(){
         return UserEntity.builder()
                 .userId(userId)
                 .userNm(userNm)
