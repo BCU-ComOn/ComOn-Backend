@@ -77,7 +77,6 @@ public class UserControllerTest {
 
         //then
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(responseEntity.getBody()).isEqualTo(1L);
 
         List<UserEntity> all = userRepository.findAll();
         assertThat(all.get(0).getUserNm()).isEqualTo(userNm);
