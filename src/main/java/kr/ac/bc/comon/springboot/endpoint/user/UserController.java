@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@CrossOrigin(origins = "https://bcu-comon.github.io/ComOn")
+@CrossOrigin
 @Transactional
 @RequestMapping("user")
 @RequiredArgsConstructor
